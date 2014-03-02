@@ -1,6 +1,8 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
+export PATH=$PATH:/usr/local/bin:/usr/local/sbin
+eval "$(rbenv init -)"
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -10,10 +12,8 @@ ZSH_THEME="bira+"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#alias vi="vim"
-alias tmux="TERM=xterm-256color tmux"
-alias full="gnome-terminal --full-screen --hide-menubar"
-pd() { pandoc "$1" -t html -o "$1".html; }
+# alias mvim="open -a MacVim"
+alias mou="open -a Mou"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -36,16 +36,9 @@ pd() { pandoc "$1" -t html -o "$1".html; }
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-alias tmux="TERM=xterm-256color tmux"
-plugins=(git)
+plugins=(git bundler)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-rvm use 1.9.3
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+gentags() { ripper-tags -e --exclude=.git --exclude='*.log' -R * `bundle show --paths`; }
